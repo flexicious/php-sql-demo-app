@@ -1,5 +1,9 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT']."/constants/Constants.php";
+if(session_id() == '') {
+    session_start();
+}
+$contextPath = $_SESSION["CONTEXT_PATH"];
+require $_SERVER['DOCUMENT_ROOT']. $contextPath ."/constants/Constants.php";
 /**
  * possible filter operations.
  *   FILTER_OPERATION_TYPE_NONE = "None";

@@ -1,6 +1,9 @@
 <?php
-
-require $_SERVER['DOCUMENT_ROOT']."/constants/Constants.php";
+if(session_id() == '') {
+    session_start();
+}
+$contextPath = $_SESSION["CONTEXT_PATH"];
+require $_SERVER['DOCUMENT_ROOT'].$contextPath."/constants/Constants.php";
 
 /**
  * Created by PhpStorm.

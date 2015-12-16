@@ -1,10 +1,14 @@
 <?php
+if(session_id() == '') {
+    session_start();
+}
+$contextPath = $_SESSION["CONTEXT_PATH"];
 
 require "Service.php";
-require $_SERVER['DOCUMENT_ROOT']."/utils/SqlUtil.php";
-require $_SERVER['DOCUMENT_ROOT']."/model/server_records.php";
-require $_SERVER['DOCUMENT_ROOT']."/model/api_response.php";
-require $_SERVER['DOCUMENT_ROOT']."/transaction/DB.php";
+require $_SERVER['DOCUMENT_ROOT'].$contextPath."/utils/SqlUtil.php";
+require $_SERVER['DOCUMENT_ROOT'].$contextPath."/model/server_records.php";
+require $_SERVER['DOCUMENT_ROOT'].$contextPath."/model/api_response.php";
+require $_SERVER['DOCUMENT_ROOT'].$contextPath."/transaction/DB.php";
 
 /**
  * Created by PhpStorm.

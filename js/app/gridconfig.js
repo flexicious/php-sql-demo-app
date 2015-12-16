@@ -4,7 +4,7 @@
 var GridConFig = window.GridConFig = {
     //ApiCallBaseUrl : "http://localhost:63343/php-sql-demo-app/api/sever_records/", // - php call
     //ApiCallBaseUrl : "http://localhost:8080/FlexiciousSpring/api/server_records/", //- java call
-    ApiCallBaseUrl : "http://localhost/api/server_records/", //- java call
+    ApiCallBaseUrl : "http://localhost/php-sql-demo-app/api/server_records/", //- java call
     XmlConfig : {
         sampleGrid: '<grid ' +
                         'height="100%" ' +

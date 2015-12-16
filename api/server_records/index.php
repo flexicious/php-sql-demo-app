@@ -1,5 +1,10 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']."/service/SqlMemoryService.php";
+if(session_id() == '') {
+    session_start();
+}
+$contextPath = $_SESSION["CONTEXT_PATH"];
+
+require_once $_SERVER['DOCUMENT_ROOT'].$contextPath."/service/SqlMemoryService.php";
 
 
 $api_name = "";
