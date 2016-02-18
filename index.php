@@ -199,6 +199,32 @@
             formatted += ":"+padZero(this.getMinutes());
             formatted += ":"+padZero(this.getSeconds());
             return formatted;
+        };
+
+
+        function refreshChildren(parent, level){
+            if(!parent || !level)
+                return;
+            $.ajax({
+                url : GridConFig.ApiCallBaseUrl,
+                data : {name : "child_data", parent_id : parent.id},
+                type : "GET",
+                success : function(res){
+                    var response = JSON.parse(res);
+                    if(response.success){
+                        level.grid.setChildData(parent, response.data, level);
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            });
+        }
+
+        function onRefreshClick(){
+            var grid = document.getElementById("grid-container").component;
+            if(!grid || !grid.getDataProvider())
+                return;
+            refreshChildren(grid.getDataProvider()[0], grid.getColumnLevel())
         }
 
     </script>
@@ -207,6 +233,9 @@
 <body>
 
 <div class="header"><span>Grid App</span></div>
+<div class="toolbar">
+    <button onclick="onRefreshClick()">Refresh Children of First Parent</button>
+</div>
 <div class="wrapper">
     <div id="grid-container"></div>
 </div>
