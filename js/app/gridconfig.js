@@ -32,7 +32,7 @@ var GridConFig = window.GridConFig = {
                         'enableMultiColumnSort="true" ' +
                         'enableColumnHeaderOperation="true" ' +
                         'selectionMode="multipleRows"> ' +
-                            '<level name="Top Level" headerHeight="30" childrenField="children" itemLoad="itemLoadHandler"  itemLoadMode="server" childrenCountField="childCounts">' +
+                            '<level name="Top Level" headerHeight="30" childrenField="children" itemOpen="itemLoadHandler"  itemLoadMode="server" childrenCountField="childCounts">' +
                                 '<columns>' +
                                     '<column dataField="record_type" width="200" headerText="Record Type" ' +
                                             'enableHierarchicalNestIndent="true" paddingLeft="25" enableExpandCollapseIcon="true"  filterControl="MultiSelectComboBox" filterOperation="Contains" filterTriggerEvent="enterKeyUpOrFocusOut" filterComboBoxDataProvider= "eval__getFilterComboBoxDP_RecordType()" />' +
@@ -69,7 +69,7 @@ function getFilterComboBoxDP_RecordType(){
    } 
 
 var itemLoadHandler = function(event){
-    var parentData = event.filter.parentObject;
+    var parentData = event.item;
     $.ajax({
         url : GridConFig.ApiCallBaseUrl,
         data : {name : "child_data", parent_id : parentData.id},
@@ -77,8 +77,8 @@ var itemLoadHandler = function(event){
         success : function(res){
             var response = JSON.parse(res);
             if(response.success){
-                var grid = event.target;
-                grid.setChildData(parentData, response.data, event.filter.level.getParentLevel());
+                var grid = event.grid;
+                grid.setChildData(parentData, response.data, event.level);
             } else {
                 alert(response.message);
             }
